@@ -8,16 +8,18 @@ public class Produto {
     private String nome;
     private double descricao;
     private int quantidade;
+    private double valor;
     private LocalDate dataFabricacao;
 
     public Produto() {
     }
 
-    public Produto(int codigo, String nome, double descricao, int quantidade, LocalDate dataFabricacao) {
+    public Produto(int codigo, String nome, double descricao, int quantidade, double valor, LocalDate dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
         this.quantidade = quantidade;
+        this.valor = valor;
         this.dataFabricacao = dataFabricacao;
     }
 
@@ -51,6 +53,14 @@ public class Produto {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public LocalDate getDataFabricacao() {

@@ -1,6 +1,5 @@
 package br.com.fiap.fiapstore.dao.impl;
 
-import br.com.fiap.fiapstore.dao.ConnectionManager;
 import br.com.fiap.fiapstore.dao.ProdutoDao;
 import br.com.fiap.fiapstore.exception.DBException;
 import br.com.fiap.fiapstore.model.Produto;
@@ -39,6 +38,8 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt.setDouble(3, produto.getValor());
             stmt.setDate(4, valueOf(produto.getDataFabricacao()));
 
+            System.out.println("Produto cadastrado com sucesso!");
+
         } catch (SQLException e) {
             throw new DBException("Erro ao cadastrar produto.");
         } finally {
@@ -72,6 +73,8 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt.setDate(4, valueOf(produto.getDataFabricacao()));
             stmt.setInt(5, produto.getCodigo());
 
+            System.out.println("Produto atualizado com sucesso!");
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,6 +100,9 @@ public class OracleProdutoDao implements ProdutoDao {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, codigo);
             stmt.executeUpdate();
+
+            System.out.println("Produto removido.");
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException("Erro ao remover produto.");
@@ -117,7 +123,7 @@ public class OracleProdutoDao implements ProdutoDao {
         ResultSet rs = null;
 
         try {
-            connection = ConnectionManager.getInstance().getConnection();
+            connection = getInstance().getConnection();
             String sql = "SELECT * FROM TB_PRODUTO WHERE COD_PRODUTO = ?";
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, codigo);
@@ -154,7 +160,7 @@ public class OracleProdutoDao implements ProdutoDao {
         ResultSet rs = null;
 
         try {
-            connection = ConnectionManager.getInstance().getConnection();
+            connection = getInstance().getConnection();
             String sql = "SELECT * FROM TB_PRODUTO";
             stmt = connection.prepareStatement(sql);
             rs = stmt.executeQuery();

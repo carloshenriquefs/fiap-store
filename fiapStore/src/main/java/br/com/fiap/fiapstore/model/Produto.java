@@ -14,12 +14,11 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(int codigo, String nome, double descricao, int quantidade, double valor, LocalDate dataFabricacao) {
+    public Produto(int codigo, String nome, double valor, int quantidade, LocalDate dataFabricacao) {
         this.codigo = codigo;
         this.nome = nome;
-        this.descricao = descricao;
-        this.quantidade = quantidade;
         this.valor = valor;
+        this.quantidade = quantidade;
         this.dataFabricacao = dataFabricacao;
     }
 

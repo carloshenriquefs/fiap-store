@@ -15,8 +15,17 @@
             <div class="card-header">
                 CADASTRO DE PRODUTO
             </div>
+
+            <c:if test="${not empty mensagem}">
+                <div class="alert alert-success ms-2 me-2 mt-2">${mensagem}</div>
+            </c:if>
+
+            <c:if test="${not empty erro}">
+                <div class="alert alert-danger ms-2 me-2 mt-2">${erro}</div>
+            </c:if>
+
             <div class="card-body">
-                <form action="produto" method="post">
+                <form action="produtos" method="post">
 
                     <div class="form-group">
                         <label for="id-nome">Nome</label>

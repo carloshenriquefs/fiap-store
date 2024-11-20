@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Cadastro</a>
+                    <a class="nav-link" aria-current="page" href="cadastro-produto.jsp">Cadastro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="game">Produtos</a>
+                    <a class="nav-link" href="produtos">Produtos</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

@@ -6,7 +6,6 @@ public class Produto {
 
     private int codigo;
     private String nome;
-    private double descricao;
     private int quantidade;
     private double valor;
     private LocalDate dataFabricacao;
@@ -36,14 +35,6 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public double getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(double descricao) {
-        this.descricao = descricao;
     }
 
     public int getQuantidade() {

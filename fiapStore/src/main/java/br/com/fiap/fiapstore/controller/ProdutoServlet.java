@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static br.com.fiap.fiapstore.factory.DaoFactory.getProdutoDao;
 import static java.lang.Double.parseDouble;
@@ -46,5 +47,12 @@ public class ProdutoServlet extends HttpServlet {
         }
 
         req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       List<Produto> lista = dao.listar();
+       req.setAttribute("produtos", lista);
+       req.getRequestDispatcher("lista-produto.jsp").forward(req, resp);
     }
 }

@@ -51,6 +51,16 @@
                                     <c:param name="codigo" value="${produto.codigo}"/>
                                 </c:url>
                                 <a href="${link}" class="btn btn-primary">Editar</a>
+
+                                <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#excluirModal"
+                                        onclick="codigoExcluir.value = ${produto.codigo}"
+                                >
+                                    Excluir
+                                </button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -61,6 +71,62 @@
         </div>
     </div>
 </div>
+
+<div
+        class="modal fade"
+        id="excluirModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1
+                        class="modal-title fs-5"
+                        id="exampleModalLabel">
+                    Confirmar Exclusão
+                </h1>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Você confirma a exclusão deste produto?</h4>
+                <p><strong>Atenção</strong>Esta ação é irreversível.</p>
+            </div>
+            <div class="modal-footer">
+
+                <form action="produtos" method="post">
+                    <input
+                            type="hidden"
+                            name="acao"
+                            value="excluir">
+                    <input
+                            type="hidden"
+                            name="codigoExcluir"
+                            id="codigoExcluir">
+                    <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Não
+                    </button>
+                    <button
+                            type="submit"
+                            class="btn btn-danger">
+                        Sim
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <%@include file="footer.jsp" %>
 <script src="resources/js/bootstrap.bundle.js"></script>
 </body>

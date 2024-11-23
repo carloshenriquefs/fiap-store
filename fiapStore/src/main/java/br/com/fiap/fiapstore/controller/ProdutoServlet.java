@@ -42,8 +42,39 @@ public class ProdutoServlet extends HttpServlet {
             case "editar":
                 editar(req, resp);
                 break;
+            case "excluir":
+                excluir(req, resp);
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String acao = req.getParameter("acao");
+
+        switch (acao) {
+            case "listar":
+                listar(req, resp);
+                break;
+            case "abrir-form-edicao":
+                abrirForm(req, resp);
+                break;
+        }
+    }
+
+    private void excluir(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        int codigo = Integer.parseInt(req.getParameter("codigoExcluir"));
+
+        try {
+            dao.remover(codigo);
+            req.setAttribute("mensagem", "Produto removido com sucesso!");
+        } catch (DBException e) {
+            e.printStackTrace();
+            req.setAttribute("erro", "Erro ao atualizar");
         }
 
+        listar(req, resp);
     }
 
     private void cadastrar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -86,21 +117,6 @@ public class ProdutoServlet extends HttpServlet {
         }
 
         listar(req, resp);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String acao = req.getParameter("acao");
-
-        switch (acao) {
-            case "listar":
-                listar(req, resp);
-                break;
-            case "abrir-form-edicao":
-                abrirForm(req, resp);
-                break;
-        }
     }
 
     private void abrirForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

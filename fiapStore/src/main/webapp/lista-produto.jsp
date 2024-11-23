@@ -26,6 +26,7 @@
                         <th class="text-end">Quantidade</th>
                         <th class="text-end">Valor</th>
                         <th class="text-center">Data de fabricação</th>
+                        <th>Categoria</th>
                         <th class="text-center"></th>
                     </tr>
                     </thead>
@@ -45,6 +46,7 @@
                                         value="${dataFabricacaoFmt}"
                                         pattern="dd/MM/yyyy"/>
                             </td>
+                            <td>${produto.categoria.nome}</td>
                             <td class="text-center">
                                 <c:url value="produtos" var="link">
                                     <c:param name="acao" value="abrir-form-edicao"/>

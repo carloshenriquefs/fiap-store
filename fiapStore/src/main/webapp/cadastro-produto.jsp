@@ -47,6 +47,21 @@
                         <input type="date" name="fabricacao" id="id-fabricacao" class="form-control">
                     </div>
 
+                    <div classs="form-group">
+                        <label for="id-categoria"> Categoria</label>
+                        <select
+                                name="categoria"
+                                id="id-categoria"
+                                class="form-control">
+
+                            <option value="0">Selecione</option>
+                            <c:forEach items="${categorias}" var="c">
+                                <option value="${c.codigo}">${c.nome}</option>
+                            </c:forEach>
+                        </select>
+
+                    </div>
+
                     <input type="submit" value="Salvar" class="btn btn-primary mt-3">
                 </form>
             </div>

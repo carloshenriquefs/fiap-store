@@ -1,7 +1,9 @@
 package br.com.fiap.fiapstore.controller;
 
+import br.com.fiap.fiapstore.dao.CategoriaDao;
 import br.com.fiap.fiapstore.dao.ProdutoDao;
 import br.com.fiap.fiapstore.exception.DBException;
+import br.com.fiap.fiapstore.model.Categoria;
 import br.com.fiap.fiapstore.model.Produto;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import static br.com.fiap.fiapstore.factory.DaoFactory.getCategoriaDao;
 import static br.com.fiap.fiapstore.factory.DaoFactory.getProdutoDao;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
@@ -24,10 +27,12 @@ import static java.time.LocalDate.parse;
 public class ProdutoServlet extends HttpServlet {
 
     private ProdutoDao dao;
+    private CategoriaDao categoriaDao;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         dao = getProdutoDao();
+        categoriaDao = getCategoriaDao();
     }
 
     @Override
@@ -59,12 +64,23 @@ public class ProdutoServlet extends HttpServlet {
             case "abrir-form-edicao":
                 abrirForm(req, resp);
                 break;
+            case "abrir-form-cadastro":
+                abrirFormCadastro(req, resp);
+                break;
         }
+    }
+
+    private void abrirFormCadastro(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        List<Categoria> lista = categoriaDao.listar();
+        req.setAttribute("categorias", lista);
+        req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
     }
 
     private void excluir(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int codigo = Integer.parseInt(req.getParameter("codigoExcluir"));
+        int codigo = parseInt(req.getParameter("codigoExcluir"));
 
         try {
             dao.remover(codigo);
@@ -83,7 +99,14 @@ public class ProdutoServlet extends HttpServlet {
         int quantidade = valueOf(req.getParameter("quantidade"));
         LocalDate fabricacao = parse(req.getParameter("fabricacao"));
 
+        int codigoCategoria = parseInt(req.getParameter("categoria"));
+
+        Categoria categoria = new Categoria();
+        categoria.setCodigo(codigoCategoria);
+
         Produto produto = new Produto(0, nome, valor, quantidade, fabricacao);
+
+        produto.setCategoria(categoria);
 
         try {
             dao.cadastrar(produto);
@@ -93,12 +116,12 @@ public class ProdutoServlet extends HttpServlet {
             req.setAttribute("erro", "Erro ao cadastrar produto");
         }
 
-        req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
+        abrirFormCadastro(req, resp);
     }
 
     private void editar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            int codigo = Integer.parseInt(req.getParameter("codigo"));
+            int codigo = parseInt(req.getParameter("codigo"));
             String nome = req.getParameter("nome");
             double valor = parseDouble(req.getParameter("valor"));
             int quantidade = valueOf(req.getParameter("quantidade"));

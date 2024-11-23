@@ -66,7 +66,7 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <a href="cadastro-produto.jsp" class="btn btn-primary">Adicionar produto</a>
+                <a href="produtos?acao=abrir-form-cadastro" class="btn btn-primary">Adicionar produto</a>
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@ public class Produto {
     private int quantidade;
     private double valor;
     private LocalDate dataFabricacao;
+    private Categoria categoria;
 
     public Produto() {
     }
@@ -59,5 +60,13 @@ public class Produto {
 
     public void setDataFabricacao(LocalDate dataFabricacao) {
         this.dataFabricacao = dataFabricacao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

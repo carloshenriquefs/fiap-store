@@ -11,7 +11,7 @@
                     <a class="nav-link" aria-current="page" href="cadastro-produto.jsp">Cadastro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="produtos">Produtos</a>
+                    <a class="nav-link" href="produtos?acao=listar">Produtos</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">

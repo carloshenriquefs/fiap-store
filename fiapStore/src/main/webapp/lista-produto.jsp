@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +26,32 @@
                         <th class="text-end">Quantidade</th>
                         <th class="text-end">Valor</th>
                         <th class="text-center">Data de fabricação</th>
+                        <th class="text-center"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${produtos}" var="produto">
                         <tr>
-                            <th>${produto.nome}</th>
-                            <th class="text-end">${produto.quantidade}</th>
-                            <th class="text-end">${produto.valor}</th>
-                            <th class="text-center">${produto.dataFabricacao}</th>
+                            <td>${produto.nome}</td>
+                            <td class="text-end">${produto.quantidade}</td>
+                            <td class="text-end">${produto.valor}</td>
+                            <td class="text-center">
+                                <fmt:parseDate
+                                        value="${produto.dataFabricacao}"
+                                        pattern="yyyy-MM-dd"
+                                        var="dataFabricacaoFmt"/>
+
+                                <fmt:formatDate
+                                        value="${dataFabricacaoFmt}"
+                                        pattern="dd/MM/yyyy"/>
+                            </td>
+                            <td class="text-center">
+                                <c:url value="produtos" var="link">
+                                    <c:param name="acao" value="abrir-form-edicao"/>
+                                    <c:param name="codigo" value="${produto.codigo}"/>
+                                </c:url>
+                                <a href="${link}" class="btn btn-primary">Editar</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

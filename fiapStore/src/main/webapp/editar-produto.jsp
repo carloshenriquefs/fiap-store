@@ -41,12 +41,29 @@
 
                     <div class="form-group mt-3">
                         <label for="id-quantidade">Quantidade</label>
-                        <input type="text" name="quantidade" id="id-quantidade" class="form-control" value="${produto.quantidade}">
+                        <input type="text" name="quantidade" id="id-quantidade" class="form-control"
+                               value="${produto.quantidade}">
                     </div>
 
                     <div class="form-group mt-3">
                         <label for="id-fabricacao">Data de Fabricação</label>
-                        <input type="date" name="fabricacao" id="id-fabricacao" class="form-control" value="${produto.dataFabricacao}">
+                        <input type="date" name="fabricacao" id="id-fabricacao" class="form-control"
+                               value="${produto.dataFabricacao}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id-fabricacao">Categoria</label>
+                        <select name="categoria" id="id-categoria" class="form-control">
+                            <option value="0">Selecione</option>
+                            <c:forEach items="${categorias}" var="c">
+                                <c:if test="${c.codigo == produto.categoria.codigo}">
+                                    <option value="${c.codigo}" selected>${c.nome}</option>
+                                </c:if>
+                                <c:if test="${c.codigo != produto.categoria.codigo}">
+                                    <option value="${c.codigo}">${c.nome}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
                     </div>
 
                     <input type="submit" value="Salvar" class="btn btn-primary mt-3">

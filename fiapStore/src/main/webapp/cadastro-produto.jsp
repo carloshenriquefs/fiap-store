@@ -47,7 +47,7 @@
                         <input type="date" name="fabricacao" id="id-fabricacao" class="form-control">
                     </div>
 
-                    <div classs="form-group">
+                    <div class="form-group mt-3">
                         <label for="id-categoria"> Categoria</label>
                         <select
                                 name="categoria"

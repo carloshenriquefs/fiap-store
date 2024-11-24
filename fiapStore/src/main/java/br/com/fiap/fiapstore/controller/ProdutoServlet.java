@@ -73,9 +73,13 @@ public class ProdutoServlet extends HttpServlet {
     private void abrirFormCadastro(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        carregarOpcoesCategoria(req);
+        req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
+    }
+
+    private void carregarOpcoesCategoria(HttpServletRequest req) {
         List<Categoria> lista = categoriaDao.listar();
         req.setAttribute("categorias", lista);
-        req.getRequestDispatcher("cadastro-produto.jsp").forward(req, resp);
     }
 
     private void excluir(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -127,7 +131,14 @@ public class ProdutoServlet extends HttpServlet {
             int quantidade = valueOf(req.getParameter("quantidade"));
             LocalDate fabricacao = parse(req.getParameter("fabricacao"));
 
+            int codigoCategoria = Integer.parseInt(req.getParameter("categoria"));
+
+            Categoria categoria = new Categoria();
+            categoria.setCodigo(codigoCategoria);
+
             Produto produto = new Produto(codigo, nome, valor, quantidade, fabricacao);
+            produto.setCategoria(categoria);
+
             dao.atualizar(produto);
 
             req.setAttribute("mensagem", "Produto atualizado com sucesso!");
@@ -146,6 +157,7 @@ public class ProdutoServlet extends HttpServlet {
         int id = parseInt(req.getParameter("codigo"));
         Produto produto = dao.buscar(id);
         req.setAttribute("produto", produto);
+        carregarOpcoesCategoria(req);
         req.getRequestDispatcher("editar-produto.jsp").forward(req, resp);
     }
 

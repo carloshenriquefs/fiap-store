@@ -14,28 +14,42 @@
                     <a class="nav-link" href="produtos?acao=listar">Produtos</a>
                 </li>
             </ul>
+            <c:if test="${empty user}">
 
-            <form class="form-inline my-lg-0" action="login" method="post">
-                <div class="row">
-                    <div class="col">
-                        <input
-                                class="form-control mr-sm-2"
-                                type="text"
-                                name="email"
-                                placeholder="E-mail">
+                <span class="navbar-text text-danger" style="margin-right: 10px">
+                        ${erro}
+                </span>
+
+                <form class="form-inline my-lg-0" action="login" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <input
+                                    class="form-control mr-sm-2"
+                                    type="text"
+                                    name="email"
+                                    placeholder="E-mail">
+                        </div>
+                        <div class="col">
+                            <input
+                                    class="form-control mr-sm-2"
+                                    type="password"
+                                    name="senha"
+                                    placeholder="Senha">
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <input
-                                class="form-control mr-sm-2"
-                                type="password"
-                                name="senha"
-                                placeholder="Senha">
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Entrar</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </c:if>
+
+            <c:if test="${not empty user}">
+                <span class="navbar-text">
+                    ${user}
+                    <a href="login" class="btn btn-outline-primary my-2 my-sm-0">Sair</a>
+                </span>
+            </c:if>
+            
         </div>
     </div>
 </nav>

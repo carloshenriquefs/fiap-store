@@ -3,20 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FiapStore</title>
+    <title>FiapStore - Home</title>
     <meta name="viewport" content="with=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/bootstrap.css">
 </head>
 <body>
 <%@include file="header.jsp" %>
 <div class="container">
-    <<div class="mt-5 ms-5 me-5">
-
-        <h1>Bem-vindos!</h1>
-
-    </div>>
+    <c:if test="${empty user}">
+        <h1 class="mt-3">Você não está autenticado!</h1>
+        <h5>Para acessar o sistema, identifique-se!</h5>
+    </c:if>
+    <c:if test="${not empty user}">
+        <h1 class="mt-3">Bem-vindo a FiapStore!</h1>
+        <h5>Seu login foi efetuado com sucesso!</h5>
+    </c:if>
 </div>
-<%@include file="footer.jsp" %>
 <script src="resources/js/bootstrap.bundle.js"></script>
 </body>
 </html>
